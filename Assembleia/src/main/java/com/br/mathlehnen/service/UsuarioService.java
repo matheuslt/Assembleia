@@ -10,6 +10,7 @@ import com.br.mathlehnen.exception.CriptografiaException;
 import com.br.mathlehnen.exception.EmailException;
 import com.br.mathlehnen.exception.UsuarioServiceException;
 import com.br.mathlehnen.model.Usuario;
+import com.br.mathlehnen.model.Votacao;
 import com.br.mathlehnen.repository.UsuarioRepository;
 import com.br.mathlehnen.util.SenhaUtil;
 
@@ -41,9 +42,9 @@ public class UsuarioService {
 		return usuario;
 	}
 	
-	public void verificarSeVotou(Usuario usuario) throws UsuarioServiceException {
-		if (ur.verificarSeVotou(usuario.getId()) != null) {
-			throw new UsuarioServiceException("O usuario já votou.");
+	/*public void verificarSeVotou(Votacao votacao, Usuario usuario) throws UsuarioServiceException {
+		if (ur.verificarSeVotou(votacao.getId(), usuario.getId()) != null) {
+			throw new UsuarioServiceException("O usuario já votou nesta votação.");
 		}
-	}
+	}*/
 }

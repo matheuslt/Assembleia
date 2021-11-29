@@ -34,14 +34,17 @@ public class Votacao implements Serializable {
 	@OneToOne(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Pauta pauta;
+	//@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	//private List<Usuario> usuarios = new ArrayList<>();
 	@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Usuario> usuarios = new ArrayList<>();
+	private List<Voto> votos = new ArrayList<>();
 	
 	
-	public Votacao(Pauta pauta, List<Usuario> usuarios) {
+	public Votacao(Pauta pauta, /*List<Usuario> usuarios*/ List<Voto> votos) {
 		super();
 		this.pauta = pauta;
-		this.usuarios = usuarios;
+		//this.usuarios = usuarios;
+		this.votos = votos;
 		setQtdsParaZero();
 	}
 
@@ -70,17 +73,22 @@ public class Votacao implements Serializable {
 		return qtdVotosNao;
 	}
 	
-	public List<Usuario> getUsuarios() {
+	/*public List<Usuario> getUsuarios() {
 		return usuarios;
+	}*/
+	
+	
+	public List<Voto> getVotos() {
+		return votos;
 	}
 	
 	public Long getId() {
 		return id;
 	}
 
-	public void contabilizarVotoDoUsuario (Votacao votacao, Usuario usuario, Voto voto)
+	public void contabilizarVotoDoUsuario (Votacao votacao, /*Usuario usuario,*/ Voto voto)
 	{
-		votacao.usuarios.add(usuario);
+		votacao.votos.add(voto);
 		if (VotoEnum.Sim.equals(voto.getVoto())) {
 			votacao.qtdVotosSim++;
 		}

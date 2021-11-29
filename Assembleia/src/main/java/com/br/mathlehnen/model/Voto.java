@@ -1,6 +1,7 @@
 package com.br.mathlehnen.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,7 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.br.mathlehnen.enums.VotoEnum;
@@ -29,9 +32,14 @@ public class Voto implements Serializable {
 	@Column(name = "voto")
 	@Enumerated(EnumType.STRING)
 	private VotoEnum voto;
-	@OneToOne(mappedBy = "voto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario_id")
 	@JsonIgnore
 	private Usuario usuario;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "votacao_id")
+	@JsonIgnore
+	private Votacao votacao;
 	
 	
 	public Voto(VotoEnum voto) {
@@ -54,4 +62,22 @@ public class Voto implements Serializable {
 	public void setVoto(VotoEnum voto) {
 		this.voto = voto;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Votacao getVotacao() {
+		return votacao;
+	}
+
+	public void setVotacao(Votacao votacao) {
+		this.votacao = votacao;
+	}
+	
+	
 }

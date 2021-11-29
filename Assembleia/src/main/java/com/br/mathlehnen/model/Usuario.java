@@ -1,22 +1,18 @@
 package com.br.mathlehnen.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
@@ -43,20 +39,20 @@ public class Usuario implements Serializable {
 	@Column(name = "senha")
 	@NotBlank(message = "O senha não pode ser em branco.")
 	private String senha;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "votacao_id")
-	@JsonIgnore
-	private Votacao votacao;
-	@OneToOne()
-	@JoinColumn(name = "voto_id")
-	private Voto voto;
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "votacao_id")
+	//@JsonIgnore
+	//private Votacao votacao;
+	@OneToMany
+	//@JoinColumn(name = "voto_id")
+	private List<Voto> votos;
 	
 	
-	public Usuario(String nome, String cpf, Votacao votacao) {
+	public Usuario(String nome, String cpf/*, Votacao votacao*/) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
-		this.votacao = votacao;
+		//this.votacao = votacao;
 	}
 	
 	public Usuario() {
@@ -85,21 +81,21 @@ public class Usuario implements Serializable {
 	}
 	
 
-	public Voto getVoto() {
-		return voto;
+	public List<Voto> getVotos() {
+		return votos;
 	}
 
-	public void setVoto(Voto voto) {
-		this.voto = voto;
+	public void setVoto(List<Voto> votos) {
+		this.votos = votos;
 	}
 
-	public Votacao getVotacao() {
+	/*public Votacao getVotacao() {
 		return votacao;
 	}
 
 	public void setVotacao(Votacao votacao) {
 		this.votacao = votacao;
-	}
+	}*/
 
 	public String getSenha() {
 		return senha;

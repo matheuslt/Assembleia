@@ -51,11 +51,11 @@ public class UsuarioController {
 		return ur.findAll();
 	}
 	
-	@PostMapping("/usuarios")
+	/*@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
 		return ur.save(usuario);
-	}
+	}*/
 	
 
 	@GetMapping("/usuarios/id={id}")
@@ -63,18 +63,19 @@ public class UsuarioController {
 		return ur.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping("/usuarios/idVotacao={idVotacao}")
+	//@PostMapping("/usuarios/idVotacao={idVotacao}")
+	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario criarUsuario(@PathVariable Long idVotacao, @RequestBody @Valid Usuario usuario, BindingResult br) throws Exception {
+	public Usuario criarUsuario(/*@PathVariable Long idVotacao,*/ @RequestBody @Valid Usuario usuario, BindingResult br) throws Exception {
 		Usuario usuarioRetorno = new Usuario();
 		if (br.hasErrors()) {
 			usuarioRetorno = usuario;
 		}
 		else {
-			Votacao votacao = new Votacao();
-			votacao = vr.findById(idVotacao).get();
-			votacao.getUsuarios().add(usuario);
-			usuario.setVotacao(votacao);
+			//Votacao votacao = new Votacao();
+			//votacao = vr.findById(idVotacao).get();
+			//votacao.getUsuarios().add(usuario);
+			//usuario.setVotacao(votacao);
 			usuarioRetorno = us.salvarUsuario(usuario);
 		}
 		return usuarioRetorno;
