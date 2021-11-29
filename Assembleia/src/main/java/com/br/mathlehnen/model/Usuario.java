@@ -3,6 +3,7 @@ package com.br.mathlehnen.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,8 +44,7 @@ public class Usuario implements Serializable {
 	//@JoinColumn(name = "votacao_id")
 	//@JsonIgnore
 	//private Votacao votacao;
-	@OneToMany
-	//@JoinColumn(name = "voto_id")
+	@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Voto> votos;
 	
 	
