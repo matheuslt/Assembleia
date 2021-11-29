@@ -65,13 +65,6 @@ public class UsuarioController {
 	
 	@PostMapping("/votacoes/{idVotacao}/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)
-	/*public Usuario criarUsuario(@PathVariable Long idVotacao, @RequestBody Usuario usuario) {
-		Votacao votacao = new Votacao();
-		votacao = vr.findById(idVotacao).get();
-		votacao.getUsuarios().add(usuario);
-		ur.save(usuario);
-		return vr.save(votacao).getUsuarios().get(votacao.getUsuarios().size() - 1);
-	}*/
 	public Usuario criarUsuario(@PathVariable Long idVotacao, @RequestBody @Valid Usuario usuario, BindingResult br) throws Exception {
 		Usuario usuarioRetorno = new Usuario();
 		if (br.hasErrors()) {
@@ -80,9 +73,9 @@ public class UsuarioController {
 		else {
 			Votacao votacao = new Votacao();
 			votacao = vr.findById(idVotacao).get();
+			votacao.getUsuarios().add(usuario);
+			usuario.setVotacao(votacao);
 			usuarioRetorno = us.salvarUsuario(usuario);
-			votacao.getUsuarios().add(usuarioRetorno);
-			vr.save(votacao);
 		}
 		return usuarioRetorno;
 	}

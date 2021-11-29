@@ -29,7 +29,7 @@ public class Voto implements Serializable {
 	@Column(name = "voto")
 	@Enumerated(EnumType.STRING)
 	private VotoEnum voto;
-	@OneToOne(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(mappedBy = "voto", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Usuario usuario;
 	

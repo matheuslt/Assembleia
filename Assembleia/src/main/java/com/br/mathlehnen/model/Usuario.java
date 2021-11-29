@@ -2,6 +2,7 @@ package com.br.mathlehnen.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuario")
@@ -40,8 +43,9 @@ public class Usuario implements Serializable {
 	@Column(name = "senha")
 	@NotBlank(message = "O senha não pode ser em branco.")
 	private String senha;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "votacao_id")
+	@JsonIgnore
 	private Votacao votacao;
 	@OneToOne()
 	@JoinColumn(name = "voto_id")

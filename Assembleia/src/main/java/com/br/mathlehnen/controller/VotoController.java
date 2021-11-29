@@ -57,19 +57,6 @@ public class VotoController {
 	
 	@PostMapping("votacoes/{idVotacao}/usuarios/{idUsuario}/votos")
 	@ResponseStatus(HttpStatus.CREATED)
-	//public Voto criarVoto(@PathVariable Long idVotacao, @PathVariable Long idUsuario, @RequestBody Voto voto) {
-	//	Votacao votacao = new Votacao();
-	//	Usuario usuario = new Usuario();
-	//	votacao = vtr.findById(idVotacao).get();
-	//	usuario = ur.findById(idUsuario).get();
-	//	usuario.setVoto(voto);
-	//	usuario.setVotacao(votacao);
-	//	Voto votoAux = vr.save(voto);
-	//	ur.save(usuario);
-	//	votacao.contabilizarVotoDoUsuario(votacao, usuario, voto);
-	//	vtr.save(votacao);
-	//	return votoAux;
-	//}
 	public Voto criarVoto(@PathVariable Long idVotacao, @PathVariable Long idUsuario, @RequestBody @Valid Voto voto, BindingResult br) throws UsuarioServiceException {
 		Voto votoRetorno = new Voto();
 		if (br.hasErrors()) {

@@ -39,9 +39,6 @@ public class PautaController {
 	
 	@PostMapping("/pautas")
 	@ResponseStatus(HttpStatus.CREATED)
-	//public Pauta criarPauta(@RequestBody Pauta pauta) {
-	//	return pr.save(pauta);
-	//}
 	public Pauta criarPauta(@RequestBody @Valid Pauta pauta, BindingResult br) {
 		Pauta pautaRetorno = new Pauta();
 		if (br.hasErrors()) {
