@@ -50,17 +50,17 @@ public class PautaController {
 		return pautaRetorno;
 	}
 	
-	@GetMapping("/pautas/{id}")
+	@GetMapping("/pautas/id={id}")
 	public ResponseEntity<Pauta> getPauta(@PathVariable Long id) {
 		return pr.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@DeleteMapping("/pautas/{id}")
+	@DeleteMapping("/pautas/id={id}")
 	public ResponseEntity<?> removerPauta(@PathVariable Long id) {
 		return pr.findById(id).map(record -> {pr.deleteById(id); return ResponseEntity.ok().build();}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PutMapping("/pautas/{id}")
+	@PutMapping("/pautas/id={id}")
 	public ResponseEntity<Pauta> alterarPauta(@PathVariable Long id, @RequestBody Pauta pauta) {
 		return pr.findById(id).map(record -> {record.setDescricao(pauta.getDescricao());
 		                                      Pauta pautaAux = pr.save(record);

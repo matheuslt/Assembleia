@@ -50,12 +50,12 @@ public class VotoController {
 		return vr.findAll();
 	}	
 	
-	@GetMapping("/votos/{id}")
+	@GetMapping("/votos/id={id}")
 	public ResponseEntity<Voto> getVoto(@PathVariable Long id) {
 		return vr.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping("votacoes/{idVotacao}/usuarios/{idUsuario}/votos")
+	@PostMapping("/votos/idVotacao={idVotacao}&idUsuario={idUsuario}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Voto criarVoto(@PathVariable Long idVotacao, @PathVariable Long idUsuario, @RequestBody @Valid Voto voto, BindingResult br) throws UsuarioServiceException {
 		Voto votoRetorno = new Voto();

@@ -41,12 +41,12 @@ public class VotacaoController {
 		return vr.findAll();
 	}
 	
-	@GetMapping("/votacoes/{id}")
+	@GetMapping("/votacoes/id={id}")
 	public ResponseEntity<?> getVotacao(@PathVariable Long id) {
 		return vr.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping("/pauta/{idPauta}/votacoes")
+	@PostMapping("/votacoes/idPauta={idPauta}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Votacao criarVotacao(@PathVariable Long idPauta, @Valid Votacao votacao, BindingResult br) {
 		Votacao votacaoRetorno = new Votacao();
@@ -63,7 +63,7 @@ public class VotacaoController {
 		return votacaoRetorno;
 	}
 	
-	@DeleteMapping("/votacoes/{id}")
+	@DeleteMapping("/votacoes/id={id}")
 	public ResponseEntity<?> removerVotacao(@PathVariable Long id) {
 		return vr.findById(id).map(record -> {vr.deleteById(id); return ResponseEntity.ok().build();}).orElse(ResponseEntity.notFound().build());
 		

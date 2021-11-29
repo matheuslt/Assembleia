@@ -58,12 +58,12 @@ public class UsuarioController {
 	}
 	
 
-	@GetMapping("/usuarios/{id}")
+	@GetMapping("/usuarios/id={id}")
 	public ResponseEntity<Usuario> getUsuario(@PathVariable Long id) {
 		return ur.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PostMapping("/votacoes/{idVotacao}/usuarios")
+	@PostMapping("/usuarios/idVotacao={idVotacao}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario criarUsuario(@PathVariable Long idVotacao, @RequestBody @Valid Usuario usuario, BindingResult br) throws Exception {
 		Usuario usuarioRetorno = new Usuario();
@@ -80,12 +80,12 @@ public class UsuarioController {
 		return usuarioRetorno;
 	}
 
-	@DeleteMapping("/usuarios/{id}")
+	@DeleteMapping("/usuarios/id={id}")
 	public ResponseEntity<?> removerUsuario(@PathVariable Long id) {
 		return vr.findById(id).map(record -> {vr.deleteById(id); return ResponseEntity.ok().build();}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@PutMapping("/usuarios/{id}")
+	@PutMapping("/usuarios/id={id}")
 	public ResponseEntity<Usuario> alterarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
 		return ur.findById(id).map(record -> {record.setCpf(usuario.getCpf());
 		                                      record.setNome(usuario.getNome());
