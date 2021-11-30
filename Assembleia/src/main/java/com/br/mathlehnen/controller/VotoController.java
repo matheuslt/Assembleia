@@ -22,7 +22,6 @@ import com.br.mathlehnen.model.Voto;
 import com.br.mathlehnen.repository.UsuarioRepository;
 import com.br.mathlehnen.repository.VotacaoRepository;
 import com.br.mathlehnen.repository.VotoRepository;
-import com.br.mathlehnen.service.UsuarioService;
 import com.br.mathlehnen.service.VotoService;
 
 @RestController
@@ -63,21 +62,15 @@ public class VotoController {
 		if (br.hasErrors()) {
 			votoRetorno = voto;
 		}
-		else {
-			//ur.verificarSeVotou(idUsuario);
-			
+		else {			
 			Votacao votacao = new Votacao();
 			Usuario usuario = new Usuario();
 			votacao = vtr.findById(idVotacao).get();
 			usuario = ur.findById(idUsuario).get();
-			//usuario.setVoto(voto);
-			//usuario.setVotacao(votacao);
 			vs.verificarSeVotou(votacao, usuario);
 			voto.setVotacao(votacao);
 			voto.setUsuario(usuario);
 			votoRetorno = vr.save(voto);
-			//ur.save(usuario);
-			//votacao.contabilizarVotoDoUsuario(votacao, usuario, voto);
 			votacao.contabilizarVotoDoUsuario(votacao, voto);
 			vtr.save(votacao);
 		}

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.mathlehnen.exception.UsuarioServiceException;
 import com.br.mathlehnen.model.Usuario;
-import com.br.mathlehnen.model.Votacao;
 import com.br.mathlehnen.repository.UsuarioRepository;
 import com.br.mathlehnen.repository.VotacaoRepository;
 import com.br.mathlehnen.service.UsuarioService;
@@ -51,19 +50,11 @@ public class UsuarioController {
 		return ur.findAll();
 	}
 	
-	/*@PostMapping("/usuarios")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
-		return ur.save(usuario);
-	}*/
-	
-
 	@GetMapping("/usuarios/id={id}")
 	public ResponseEntity<Usuario> getUsuario(@PathVariable Long id) {
 		return ur.findById(id).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//@PostMapping("/usuarios/idVotacao={idVotacao}")
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Usuario criarUsuario(/*@PathVariable Long idVotacao,*/ @RequestBody @Valid Usuario usuario, BindingResult br) throws Exception {
@@ -72,10 +63,6 @@ public class UsuarioController {
 			usuarioRetorno = usuario;
 		}
 		else {
-			//Votacao votacao = new Votacao();
-			//votacao = vr.findById(idVotacao).get();
-			//votacao.getUsuarios().add(usuario);
-			//usuario.setVotacao(votacao);
 			usuarioRetorno = us.salvarUsuario(usuario);
 		}
 		return usuarioRetorno;

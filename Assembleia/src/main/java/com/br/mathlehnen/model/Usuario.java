@@ -40,21 +40,9 @@ public class Usuario implements Serializable {
 	@Column(name = "senha")
 	@NotBlank(message = "O senha não pode ser em branco.")
 	private String senha;
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name = "votacao_id")
-	//@JsonIgnore
-	//private Votacao votacao;
 	@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Voto> votos;
-	
-	
-	public Usuario(String nome, String cpf/*, Votacao votacao*/) {
-		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		//this.votacao = votacao;
-	}
-	
+		
 	public Usuario() {
 		super();
 	}
@@ -88,14 +76,6 @@ public class Usuario implements Serializable {
 	public void setVoto(List<Voto> votos) {
 		this.votos = votos;
 	}
-
-	/*public Votacao getVotacao() {
-		return votacao;
-	}
-
-	public void setVotacao(Votacao votacao) {
-		this.votacao = votacao;
-	}*/
 
 	public String getSenha() {
 		return senha;

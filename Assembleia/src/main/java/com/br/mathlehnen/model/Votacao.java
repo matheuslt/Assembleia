@@ -34,25 +34,9 @@ public class Votacao implements Serializable {
 	@OneToOne(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Pauta pauta;
-	//@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
-	//private List<Usuario> usuarios = new ArrayList<>();
 	@OneToMany(mappedBy = "votacao", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Voto> votos = new ArrayList<>();
 	
-	
-	public Votacao(Pauta pauta, /*List<Usuario> usuarios*/ List<Voto> votos) {
-		super();
-		this.pauta = pauta;
-		//this.usuarios = usuarios;
-		this.votos = votos;
-		setQtdsParaZero();
-	}
-
-	public Votacao(Pauta pauta) {
-		super();
-		this.pauta = pauta;
-		setQtdsParaZero();
-	}
 
 	public Votacao() {
 		super();
@@ -72,11 +56,6 @@ public class Votacao implements Serializable {
 	public int getQtdVotosNao() {
 		return qtdVotosNao;
 	}
-	
-	/*public List<Usuario> getUsuarios() {
-		return usuarios;
-	}*/
-	
 	
 	public List<Voto> getVotos() {
 		return votos;
