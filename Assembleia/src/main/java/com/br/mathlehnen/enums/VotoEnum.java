@@ -4,6 +4,7 @@ public enum VotoEnum {
 	Não("NÃO"),
 	Sim("SIM");
 
+	@SuppressWarnings("unused")
 	private String voto;
 	
 	private VotoEnum(String voto) {
